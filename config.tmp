@@ -1,0 +1,18 @@
+<?php
+  $db['user'] = '${MYSQL_USER}';
+  $db['pass'] = '${MYSQL_PASS}';
+  $db['host'] = '${MYSQL_HOST}';
+  $db['name'] = '${MYSQL_DB}';
+  
+  define('PHP_ACTIVERECORD_AUTOLOAD_DISABLE',true);
+  require_once 'php-activerecord/ActiveRecord.php';
+  ActiveRecord\Config::initialize(function($cfg){
+    tglobal $db;
+    $cfg->set_connections(array(
+      'development' => 'mysql://'.$db['user'].':'.$db['pass'].'@'.$db['host'].'/'.$db['name']
+    ));
+  });
+  function __autoload($class) {
+    require strtolower($class).'.php';
+  }
+?>
