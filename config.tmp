@@ -7,7 +7,7 @@
   define('PHP_ACTIVERECORD_AUTOLOAD_DISABLE',true);
   require_once 'php-activerecord/ActiveRecord.php';
   ActiveRecord\Config::initialize(function($cfg){
-    tglobal $db;
+    global $db;
     $cfg->set_connections(array(
       'development' => 'mysql://'.$db['user'].':'.$db['pass'].'@'.$db['host'].'/'.$db['name']
     ));
